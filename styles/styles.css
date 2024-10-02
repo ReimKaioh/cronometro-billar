@@ -1,11 +1,11 @@
-/* Estilos generales para la interfaz gamer */
 body {
-    background-color: #1e1e1e;
-    font-family: 'Orbitron', sans-serif;
-    color: white;
+    font-family: Arial, sans-serif;
+    background-image: url('fondo.png'); /* Ruta de tu imagen */
+    background-size: cover; /* Para que la imagen cubra toda la pantalla */
+    background-position: center; /* Centrar la imagen */
+    background-repeat: no-repeat; /* Evitar que la imagen se repita */
+    color: #ffffff;
     text-align: center;
-    margin: 0;
-    padding: 0;
 }
 
 h1 {
