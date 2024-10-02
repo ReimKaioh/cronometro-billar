@@ -1,63 +1,87 @@
-let mesas = {}; // Almacena el tiempo y estado de cada mesa
-let intervalos = {}; // Almacena los intervalos activos
+let mesas = {}; // Objeto para almacenar las mesas y su tiempo
+let intervalos = {}; // Almacenar los intervalos de cada mesa
 
-// Función para crear una nueva mesa con su temporizador
-function agregarMesa(idMesa) {
-    mesas[idMesa] = { tiempo: 0, enUso: false }; // Inicia la mesa con 0 tiempo y estado "pausado"
-    actualizarInterfaz(); // Actualizar la interfaz con la nueva mesa
+// Función para formatear el tiempo a hh:mm:ss
+function formatearTiempo(segundosTotales) {
+    const horas = Math.floor(segundosTotales / 3600);
+    const minutos = Math.floor((segundosTotales % 3600) / 60);
+    const segundos = segundosTotales % 60;
+
+    const horasFormateadas = horas.toString().padStart(2, '0');
+    const minutosFormateados = minutos.toString().padStart(2, '0');
+    const segundosFormateados = segundos.toString().padStart(2, '0');
+
+    return `${horasFormateadas}:${minutosFormateados}:${segundosFormateados}`;
 }
 
-// Función para iniciar el temporizador de una mesa
+// Función para crear una mesa en la interfaz
+function crearMesa(idMesa) {
+    const mesasContainer = document.getElementById('mesas-container');
+    const mesaDiv = document.createElement('div');
+    mesaDiv.className = 'mesa';
+    mesaDiv.id = idMesa;
+    
+    mesaDiv.innerHTML = `
+        <h2>${idMesa}</h2>
+        <p>Tiempo: <span id="${idMesa}-tiempo">00:00:00</span></p>
+        <button onclick="iniciarTemporizador('${idMesa}')">Iniciar</button>
+        <button onclick="pausarTemporizador('${idMesa}')">Pausar</button>
+        <button onclick="resetearTemporizador('${idMesa}')">Resetear</button>
+    `;
+
+    mesasContainer.appendChild(mesaDiv);
+}
+
+// Función para actualizar el tiempo en la interfaz
+function actualizarTiempo(idMesa) {
+    const tiempoFormateado = formatearTiempo(mesas[idMesa].tiempo);
+    document.getElementById(`${idMesa}-tiempo`).textContent = tiempoFormateado;
+}
+
+// Función para iniciar el temporizador
 function iniciarTemporizador(idMesa) {
     if (!mesas[idMesa].enUso) {
         mesas[idMesa].enUso = true;
         intervalos[idMesa] = setInterval(() => {
             mesas[idMesa].tiempo++;
-            actualizarInterfaz(idMesa);
-        }, 1000); // Actualiza cada segundo
+            actualizarTiempo(idMesa);
+        }, 1000);
     }
 }
 
-// Función para pausar el temporizador de una mesa
+// Función para pausar el temporizador
 function pausarTemporizador(idMesa) {
-    if (mesas[idMesa].enUso) {
-        clearInterval(intervalos[idMesa]);
-        mesas[idMesa].enUso = false;
-    }
+    clearInterval(intervalos[idMesa]);
+    mesas[idMesa].enUso = false;
 }
 
-// Función para resetear el temporizador de una mesa
+// Función para resetear el temporizador
 function resetearTemporizador(idMesa) {
     clearInterval(intervalos[idMesa]);
     mesas[idMesa].tiempo = 0;
     mesas[idMesa].enUso = false;
-    actualizarInterfaz(idMesa);
+    actualizarTiempo(idMesa);
 }
 
-// Función para actualizar la interfaz y mostrar el tiempo en formato hh:mm:ss
-function actualizarInterfaz(idMesa) {
-    const tiempoTotal = mesas[idMesa].tiempo;
-    const horas = Math.floor(tiempoTotal / 3600);
-    const minutos = Math.floor((tiempoTotal % 3600) / 60);
-    const segundos = tiempoTotal % 60;
-    document.getElementById(`${idMesa}-tiempo`).textContent = 
-        `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
-}
-
-// Función para eliminar una mesa
-function eliminarMesa(idMesa) {
-    clearInterval(intervalos[idMesa]);
-    delete mesas[idMesa];
-    actualizarInterfaz(); // Vuelve a renderizar la lista sin la mesa eliminada
-}
-
-// Ejemplo de cómo manejar agregar y eliminar mesas en la interfaz
-document.getElementById('agregarMesaBtn').addEventListener('click', () => {
+// Función para agregar una nueva mesa
+function agregarMesa() {
     const nuevaMesaId = `mesa${Object.keys(mesas).length + 1}`;
-    agregarMesa(nuevaMesaId);
-});
+    mesas[nuevaMesaId] = { tiempo: 0, enUso: false };
+    crearMesa(nuevaMesaId);
+}
 
-document.getElementById('eliminarMesaBtn').addEventListener('click', () => {
-    const ultimaMesaId = `mesa${Object.keys(mesas).length}`;
-    eliminarMesa(ultimaMesaId);
-});
+// Función para eliminar la última mesa
+function eliminarMesa() {
+    const mesasIds = Object.keys(mesas);
+    if (mesasIds.length > 0) {
+        const ultimaMesaId = mesasIds[mesasIds.length - 1];
+        clearInterval(intervalos[ultimaMesaId]); // Detenemos el temporizador
+        delete mesas[ultimaMesaId]; // Eliminamos la mesa del objeto
+        const mesaDiv = document.getElementById(ultimaMesaId);
+        mesaDiv.remove(); // Eliminamos el div de la interfaz
+    }
+}
+
+// Asignamos los eventos a los botones
+document.getElementById('agregarMesaBtn').addEventListener('click', agregarMesa);
+document.getElementById('eliminarMesaBtn').addEventListener('click', eliminarMesa);
