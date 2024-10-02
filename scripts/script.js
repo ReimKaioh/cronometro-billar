@@ -1,7 +1,3 @@
-const mesasContainer = document.getElementById('mesas-container');
-
-let mesas = {};
-
 // Almacenar información de las mesas
 let mesas = [];
 let intervalo;
@@ -85,21 +81,3 @@ document.getElementById('eliminar-mesa').addEventListener('click', eliminarMesa)
 
 // Iniciar el intervalo para actualizar el tiempo cada segundo
 intervalo = setInterval(actualizarTiempos, 1000);
-
-// Función para actualizar la interfaz de las mesas
-function actualizarMesas() {
-    mesasContainer.innerHTML = '';
-    for (let mesa in mesas) {
-        mesasContainer.innerHTML += `
-            <div class="mesa">
-                <h2>${mesa}</h2>
-                <p>Tiempo: 00:00:00</p>
-                <button onclick="iniciarMesa('${mesa}')">Iniciar</button>
-                <button onclick="pausarMesa('${mesa}')">Pausar</button>
-                <button onclick="resetearMesa('${mesa}')">Resetear</button>
-            </div>
-        `;
-    }
-}
-
-
