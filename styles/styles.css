@@ -1,12 +1,72 @@
-body {
+bbody {
+    font-family: 'Orbitron', sans-serif;  /* Puedes usar una fuente estilo gamer como Orbitron */
     background-image: url('fondo.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    min-height: 100vh;
     margin: 0;
-    width: 100%;
+    min-height: 100vh;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Estilo para los títulos de las mesas */
+h2 {
+    font-size: 2rem;
+    color: #00ff00;  /* Color verde neón */
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00; /* Efecto de brillo */
+    margin-bottom: 10px;
+}
+
+/* Estilo para el temporizador de las mesas */
+#mesas-container p {
+    font-size: 1.5rem;
+    color: #00ff00;  /* Verde neón para el texto */
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00; /* Sombra luminosa */
+}
+
+/* Botones con estilo gamer */
+button {
+    background-color: #ff0000; /* Rojo brillante */
+    color: #fff;
+    border: 2px solid #ff0000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; /* Efecto de brillo rojo */
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff8000; /* Cambia a un naranja brillante al pasar el cursor */
+    box-shadow: 0 0 10px #ff8000, 0 0 20px #ff8000; /* Brillo naranja */
+}
+
+/* Contenedor de las mesas */
+.mesa {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #00ff00;  /* Borde verde neón */
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; /* Sombra verde neón */
+}
+
+/* Texto del temporizador */
+.mesa p span {
+    font-size: 2rem;
+    color: #00ff00;  /* Color verde para el temporizador */
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+/* Asegúrate de que los contenedores no se expandan demasiado */
+.mesa {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 
