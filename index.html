@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Billar Gamer</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Billar Cronómetro Gamer</title>
+    
+    <!-- Link a la fuente Orbitron para darle un estilo gamer -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Temporizador Mesas Billar</h1>
-        <div id="mesas-container">
-            <!-- Aquí se añadirán las mesas dinámicamente -->
-        </div>
+        <h1>Billar - Mesas en Uso</h1>
+        <div id="mesas-container"></div>
         <div class="controls">
-            <button id="agregarMesaBtn">Agregar Mesa</button>
-            <button id="eliminarMesaBtn">Eliminar Mesa</button>
+            <button id="agregar-mesa">Agregar Mesa</button>
+            <button id="eliminar-mesa">Eliminar Mesa</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Script para manejar las mesas -->
+    <script src="scripts/script.js"></script>
 </body>
 </html>
