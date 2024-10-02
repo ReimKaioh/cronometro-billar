@@ -1,81 +1,48 @@
-// script.js
-let mesas = {};  // Almacenamos las mesas
-let intervalos = {};  // Para guardar los intervalos de los temporizadores
+const mesasContainer = document.getElementById('mesas-container');
 
-// Formatear tiempo (hh:mm:ss)
-function formatearTiempo(segundosTotales) {
-    const horas = Math.floor(segundosTotales / 3600);
-    const minutos = Math.floor((segundosTotales % 3600) / 60);
-    const segundos = segundosTotales % 60;
+let mesas = {};
 
-    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
-}
+// Función para agregar una nueva mesa
+document.getElementById('agregar-mesa').addEventListener('click', () => {
+    const mesaId = `mesa${Object.keys(mesas).length + 1}`;
+    mesas[mesaId] = { tiempo: 0 };
+    actualizarMesas();
+});
 
-// Crear una mesa en la interfaz
-function crearMesa(idMesa) {
-    const mesasContainer = document.getElementById('mesas-container');
-    const mesaDiv = document.createElement('div');
-    mesaDiv.className = 'mesa';
-    mesaDiv.id = idMesa;
-    
-    mesaDiv.innerHTML = `
-        <h2>${idMesa}</h2>
-        <p>Tiempo: <span id="${idMesa}-tiempo">00:00:00</span></p>
-        <button onclick="iniciarTemporizador('${idMesa}')">Iniciar</button>
-        <button onclick="pausarTemporizador('${idMesa}')">Pausar</button>
-        <button onclick="resetearTemporizador('${idMesa}')">Resetear</button>
-    `;
-    mesasContainer.appendChild(mesaDiv);
-}
+// Función para eliminar la última mesa
+document.getElementById('eliminar-mesa').addEventListener('click', () => {
+    const keys = Object.keys(mesas);
+    if (keys.length > 0) {
+        delete mesas[keys[keys.length - 1]];
+        actualizarMesas();
+    }
+});
 
-// Actualizar el tiempo mostrado
-function actualizarTiempo(idMesa) {
-    document.getElementById(`${idMesa}-tiempo`).textContent = formatearTiempo(mesas[idMesa].tiempo);
-}
-
-// Iniciar el temporizador
-function iniciarTemporizador(idMesa) {
-    if (!mesas[idMesa].enUso) {
-        mesas[idMesa].enUso = true;
-        intervalos[idMesa] = setInterval(() => {
-            mesas[idMesa].tiempo++;
-            actualizarTiempo(idMesa);
-        }, 1000);
+// Función para actualizar la interfaz de las mesas
+function actualizarMesas() {
+    mesasContainer.innerHTML = '';
+    for (let mesa in mesas) {
+        mesasContainer.innerHTML += `
+            <div class="mesa">
+                <h2>${mesa}</h2>
+                <p>Tiempo: 00:00:00</p>
+                <button onclick="iniciarMesa('${mesa}')">Iniciar</button>
+                <button onclick="pausarMesa('${mesa}')">Pausar</button>
+                <button onclick="resetearMesa('${mesa}')">Resetear</button>
+            </div>
+        `;
     }
 }
 
-// Pausar el temporizador
-function pausarTemporizador(idMesa) {
-    clearInterval(intervalos[idMesa]);
-    mesas[idMesa].enUso = false;
+// Funciones para manejar el cronómetro (iniciar, pausar, resetear)
+function iniciarMesa(mesa) {
+    // Aquí iría la lógica para iniciar el cronómetro
 }
 
-// Resetear el temporizador
-function resetearTemporizador(idMesa) {
-    clearInterval(intervalos[idMesa]);
-    mesas[idMesa].tiempo = 0;
-    mesas[idMesa].enUso = false;
-    actualizarTiempo(idMesa);
+function pausarMesa(mesa) {
+    // Aquí iría la lógica para pausar el cronómetro
 }
 
-// Agregar una nueva mesa
-function agregarMesa() {
-    const nuevaMesaId = `mesa${Object.keys(mesas).length + 1}`;
-    mesas[nuevaMesaId] = { tiempo: 0, enUso: false };
-    crearMesa(nuevaMesaId);
+function resetearMesa(mesa) {
+    // Aquí iría la lógica para resetear el cronómetro
 }
-
-// Eliminar la última mesa
-function eliminarMesa() {
-    const mesasIds = Object.keys(mesas);
-    if (mesasIds.length > 0) {
-        const ultimaMesaId = mesasIds[mesasIds.length - 1];
-        clearInterval(intervalos[ultimaMesaId]);
-        delete mesas[ultimaMesaId];
-        document.getElementById(ultimaMesaId).remove();
-    }
-}
-
-// Eventos para los botones de agregar y eliminar mesa
-document.getElementById('agregarMesaBtn').addEventListener('click', agregarMesa);
-document.getElementById('eliminarMesaBtn').addEventListener('click', eliminarMesa);
