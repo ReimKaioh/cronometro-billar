@@ -1,25 +1,46 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Billar Cronómetro Gamer</title>
-    
-    <!-- Link a la fuente Orbitron para darle un estilo gamer -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/styles.css">
+    <title>Temporizador de Mesas</title>
+    <style>
+        /* Algunos estilos básicos para la interfaz gamer */
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        .mesa {
+            background-color: #333;
+            border: 2px solid #555;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #666;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Billar - Mesas en Uso</h1>
-        <div id="mesas-container"></div>
-        <div class="controls">
-            <button id="agregar-mesa">Agregar Mesa</button>
-            <button id="eliminar-mesa">Eliminar Mesa</button>
-        </div>
+    <h1>Temporizador de Mesas de Billar</h1>
+    <div id="mesas-container">
+        <!-- Las mesas se generarán aquí dinámicamente -->
     </div>
 
-    <!-- Script para manejar las mesas -->
-    <script src="scripts/script.js"></script>
+    <button id="agregarMesaBtn">Agregar Mesa</button>
+    <button id="eliminarMesaBtn">Eliminar Mesa</button>
+
+    <script src="script.js"></script>
 </body>
 </html>
