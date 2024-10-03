@@ -48,6 +48,7 @@ button:hover {
 
 /* Contenedor de las mesas */
 .mesa {
+    display:flex;
     background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
     padding: 20px;
     border-radius: 10px;
@@ -65,6 +66,7 @@ button:hover {
 
 /* Asegúrate de que los contenedores no se expandan demasiado */
 .mesa {
+    display:flex;
     max-width: 400px;
     margin: 0 auto;
 }
@@ -113,6 +115,7 @@ button:active {
 
 /* Estilo para las mesas */
 .mesa {
+    display:flex;
     background-color: black;
     border: 3px solid #00ff00;
     padding: 20px;
@@ -128,6 +131,95 @@ button:active {
     text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
 }
 
+@keyframes(max-width:768px){
+
+.mesa {
+    flex-direction:column;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #00ff00;  /* Borde verde neón */
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; /* Sombra verde neón */
+}
+
+    .mesa p span {
+    font-size: 2rem;
+    color: #00ff00;  /* Color verde para el temporizador */
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+    .mesa {
+    flex-direction:column;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+
+h1 {
+    font-size: 3em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: rgb-cycle 3s infinite alternate;
+}
+
+.container {
+    
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+/* Botones estilo gamer */
+button {
+    background-color: black;
+    color: white;
+    border: 2px solid #00ff00;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    text-transform: uppercase;
+    margin: 10px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+button:hover {
+    background-color: #00ff00;
+    color: black;
+    box-shadow: 0px 0px 15px 5px #00ff00;
+}
+
+button:active {
+    background-color: #ff0000;
+    box-shadow: 0px 0px 20px 5px #ff0000;
+}
+
+/* Estilo para las mesas */
+.mesa {
+    flex-direction:column;
+    background-color: black;
+    border: 3px solid #00ff00;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0px 0px 10px 2px #00ff00;
+}
+
+.mesa h2 {
+    font-size: 2em;
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+
+
+
+
+}
 /* Efecto RGB dinámico */
 @keyframes rgb-cycle {
     0% {
@@ -139,6 +231,7 @@ button:active {
     100% {
         color: #0000ff;
     }
+    
 }
 
 /* Animación para bordes RGB */
